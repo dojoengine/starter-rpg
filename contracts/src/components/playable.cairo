@@ -102,7 +102,7 @@ mod PlayableComponent {
 
             // [Effect] Defend
             if dungeon.is_done() {
-                player.reward(dungeon.treasury());
+                player.reward(dungeon.get_treasury());
             } else {
                 player.take_damage(dungeon.role.into(), dungeon.damage);
             }

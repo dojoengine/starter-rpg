@@ -45,7 +45,7 @@ impl DungeonImpl of DungeonTrait {
     }
 
     #[inline]
-    fn treasury(self: Dungeon) -> u16 {
+    fn get_treasury(self: Dungeon) -> u16 {
         let monster: Monster = self.monster.into();
         monster.reward()
     }
@@ -55,34 +55,17 @@ impl DungeonImpl of DungeonTrait {
 impl DungeonAssert of AssertTrait {
     #[inline]
     fn assert_is_done(self: Dungeon) {
-        assert(self.is_zero(), errors::DUNGEON_NOT_DONE);
+        assert(self.is_done(), errors::DUNGEON_NOT_DONE);
     }
 
     #[inline]
     fn assert_not_done(self: Dungeon) {
-        assert(self.is_non_zero(), errors::DUNGEON_ALREADY_DONE);
+        assert(!self.is_done(), errors::DUNGEON_ALREADY_DONE);
     }
 
     #[inline]
     fn assert_is_shop(self: Dungeon) {
         assert(self.monster == Monster::None.into(), errors::DUNGEON_NOT_SHOP);
-    }
-}
-
-impl ZeroableDungeonImpl of core::Zeroable<Dungeon> {
-    #[inline]
-    fn zero() -> Dungeon {
-        Dungeon { id: 0, monster: 0, role: 0, damage: 0, health: 0, reward: 0 }
-    }
-
-    #[inline]
-    fn is_zero(self: Dungeon) -> bool {
-        self.monster == Monster::None.into() || self.health == 0
-    }
-
-    #[inline]
-    fn is_non_zero(self: Dungeon) -> bool {
-        !self.is_zero()
     }
 }
 

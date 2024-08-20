@@ -109,12 +109,12 @@ impl PlayerImpl of PlayerTrait {
 impl PlayerAssert of AssertTrait {
     #[inline]
     fn assert_exists(self: Player) {
-        assert(self.is_non_zero(), errors::PLAYER_NOT_EXIST);
+        assert(0 != self.name, errors::PLAYER_NOT_EXIST);
     }
 
     #[inline]
     fn assert_not_exists(self: Player) {
-        assert(self.is_zero(), errors::PLAYER_ALREADY_EXIST);
+        assert(0 == self.name, errors::PLAYER_ALREADY_EXIST);
     }
 
     #[inline]
@@ -125,25 +125,6 @@ impl PlayerAssert of AssertTrait {
     #[inline]
     fn assert_is_affordable(self: Player, cost: u16) {
         assert(self.gold >= cost, errors::PLAYER_NOT_ENOUGH_GOLD);
-    }
-}
-
-impl ZeroablePlayerImpl of core::Zeroable<Player> {
-    #[inline]
-    fn zero() -> Player {
-        Player {
-            id: 0, mode: 0, role: 0, damage: 0, health: 0, gold: 0, score: 0, seed: 0, name: 0
-        }
-    }
-
-    #[inline]
-    fn is_zero(self: Player) -> bool {
-        0 == self.name
-    }
-
-    #[inline]
-    fn is_non_zero(self: Player) -> bool {
-        !self.is_zero()
     }
 }
 
