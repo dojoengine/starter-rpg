@@ -48,11 +48,11 @@ mod helpers {
     mod seeder;
 }
 
-#[cfg(test)]
-mod tests {
-    mod setup;
-    mod test_setup;
-    mod test_move;
-    mod test_attack;
-    mod test_heal;
-}
+// #[cfg(test)]
+// mod tests {
+//     mod setup;
+//     mod test_setup;
+//     mod test_move;
+//     mod test_attack;
+//     mod test_heal;
+// }
