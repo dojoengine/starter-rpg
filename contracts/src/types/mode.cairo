@@ -16,22 +16,12 @@ enum Mode {
 impl ModeImpl of ModeTrait {
     #[inline]
     fn monster(self: Mode, seed: felt252) -> Monster {
-        match self {
-            Mode::None => Monster::None,
-            Mode::Easy => modes::easy::Easy::monster(seed),
-            Mode::Medium => modes::medium::Medium::monster(seed),
-            Mode::Hard => modes::hard::Hard::monster(seed),
-        }
+        Monster::None
     }
 
     #[inline]
     fn role(self: Mode, seed: felt252, player_role: Role) -> Role {
-        match self {
-            Mode::None => Role::None,
-            Mode::Easy => modes::easy::Easy::role(seed, player_role),
-            Mode::Medium => modes::medium::Medium::role(seed, player_role),
-            Mode::Hard => modes::hard::Hard::role(seed, player_role),
-        }
+        Role::None
     }
 }
 

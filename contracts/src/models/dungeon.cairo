@@ -34,20 +34,20 @@ impl DungeonImpl of DungeonTrait {
 
     #[inline]
     fn is_done(self: Dungeon) -> bool {
-        self.monster == Monster::None.into() || self.health == 0
+        // [Check] Monster is either None or health is 0
+        false
     }
 
     #[inline]
-    fn take_damage(ref self: Dungeon, player_role: Role, damage: u8) {
-        let monster_role: Role = self.role.into();
-        let received_damage = monster_role.received_damage(player_role, damage);
-        self.health -= core::cmp::min(self.health, received_damage);
+    fn take_damage(ref self: Dungeon, player_role: Role, damage: u8) { // [Compute] Monster role
+    // [Compute] Received damage
+    // [Effect] Take damage (minimum between health and received damage)
     }
 
     #[inline]
     fn get_treasury(self: Dungeon) -> u16 {
-        let monster: Monster = self.monster.into();
-        monster.reward()
+        // [Compute] Monster reward
+        0
     }
 }
 

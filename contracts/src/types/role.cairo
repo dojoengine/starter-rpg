@@ -15,36 +15,17 @@ enum Role {
 impl RoleImpl of RoleTrait {
     #[inline]
     fn weakness(self: Role) -> Role {
-        match self {
-            Role::None => Role::None,
-            Role::Fire => roles::fire::Fire::weakness(self),
-            Role::Water => roles::water::Water::weakness(self),
-            Role::Earth => roles::earth::Earth::weakness(self),
-            Role::Air => roles::air::Air::weakness(self),
-        }
+        Role::None
     }
 
     #[inline]
     fn strength(self: Role) -> Role {
-        match self {
-            Role::None => Role::None,
-            Role::Fire => roles::fire::Fire::strength(self),
-            Role::Water => roles::water::Water::strength(self),
-            Role::Earth => roles::earth::Earth::strength(self),
-            Role::Air => roles::air::Air::strength(self),
-        }
+        Role::None
     }
 
     #[inline]
     fn received_damage(self: Role, role: Role, damage: u8) -> u8 {
-        let role_id: u8 = self.into();
-        if role_id == self.weakness().into() {
-            damage * 2
-        } else if role_id == self.strength().into() {
-            damage / 2
-        } else {
-            damage
-        }
+        0
     }
 }
 

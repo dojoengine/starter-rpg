@@ -14,32 +14,17 @@ enum Monster {
 impl MonsterImpl of MonsterTrait {
     #[inline]
     fn damage(self: Monster) -> u8 {
-        match self {
-            Monster::None => 0,
-            Monster::Common => monsters::common::Common::damage(),
-            Monster::Elite => monsters::elite::Elite::damage(),
-            Monster::Boss => monsters::boss::Boss::damage(),
-        }
+        0
     }
 
     #[inline]
     fn health(self: Monster) -> u8 {
-        match self {
-            Monster::None => 0,
-            Monster::Common => monsters::common::Common::health(),
-            Monster::Elite => monsters::elite::Elite::health(),
-            Monster::Boss => monsters::boss::Boss::health(),
-        }
+        0
     }
 
     #[inline]
     fn reward(self: Monster) -> u16 {
-        match self {
-            Monster::None => 0,
-            Monster::Common => monsters::common::Common::reward(),
-            Monster::Elite => monsters::elite::Elite::reward(),
-            Monster::Boss => monsters::boss::Boss::reward(),
-        }
+        0
     }
 }
 
