@@ -30,7 +30,10 @@ impl PlayerImpl of PlayerTrait {
     #[inline]
     fn new(id: felt252, name: felt252, time: u64, mode: Mode) -> Player {
         // [Check] Name is valid
+        assert(name != 0, errors::PLAYER_INVALID_NAME);
         // [Compute] Weekly seed according to the timestamp and the mode
+        let seed_id: felt252 = Seeder::compute_id(time).into();
+        let seed = Seeder::reseed(seed_id, mode.into());
         // [Return] Player
         Player {
             id,
@@ -40,42 +43,65 @@ impl PlayerImpl of PlayerTrait {
             health: DEFAULT_PLAYER_HEALTH,
             gold: DEFAULT_PLAYER_GOLD,
             score: 0,
-            seed: 0,
+            seed,
             name
         }
     }
 
     #[inline]
-    fn enrole(ref self: Player, role: Role) { // [Check] Role is valid
-    // [Effect] Change the role
-    // [Effect] Reseed with the role
+    fn enrole(ref self: Player, role: Role) {
+        // [Check] Role is valid
+        let role_id: u8 = role.into();
+        assert(role_id != Role::None.into(), errors::PLAYER_INVALID_CLASS);
+        // [Effect] Change the role
+        self.role = role_id;
+        // [Effect] Reseed
+        self.seed = Seeder::reseed(self.seed, role_id.into());
     }
 
     #[inline]
     fn move(ref self: Player, direction: Direction) -> (Monster, Role) {
         // [Check] Direction is valid
+        let direction_id: u8 = direction.into();
+        assert(direction_id != Direction::None.into(), errors::PLAYER_INVALID_DIRECTION);
         // [Effect] For the first move, spawn a specific monster and a role
+        if self.score == 0 {
+            let role: Role = self.role.into();
+            return (Monster::Common, role.strength());
+        }
         // [Effect] Spawn monster and role
-        // [Effect] Reseed with the direction
+        let seed: u256 = self.seed.into();
+        let mode: Mode = self.mode.into();
+        let monster: Monster = mode.monster(seed.low.into());
+        let role: Role = mode.role(seed.high.into(), self.role.into());
+        // [Effect] Reseed
+        self.seed = Seeder::reseed(self.seed, direction_id.into());
         // [Return] Monster and role
-        (Monster::None, Role::None)
+        (monster, role)
     }
 
     #[inline]
-    fn take_damage(ref self: Player, monster_role: Role, damage: u8) { // [Compute] Player role
-    // [Compute] Received damage
-    // [Effect] Take damage (minimum between health and received damage)
+    fn take_damage(ref self: Player, monster_role: Role, damage: u8) {
+        let player_role: Role = self.role.into();
+        let received_damage = player_role.received_damage(monster_role, damage);
+        self.health -= core::cmp::min(self.health, received_damage);
     }
 
     #[inline]
-    fn reward(ref self: Player, gold: u16) {// [Effect] Add gold to the player balance
-    // [Effect] Increase the player score
+    fn reward(ref self: Player, gold: u16) {
+        self.gold += gold;
+        self.score += 1;
     }
 
     #[inline]
-    fn heal(ref self: Player, quantity: u8) {// [Check] Affordable
-    // [Effect] Remove gold
-    // [Effect] Restore health
+    fn heal(ref self: Player, quantity: u8) {
+        // [Check] Affordable
+        let cost: u16 = quantity.into() * DEFAULT_POTION_COST;
+        self.assert_is_affordable(cost);
+        // [Effect] Remove gold
+        self.gold -= cost;
+        // [Effect] Restore health
+        self.health += core::cmp::min(DEFAULT_POTION_HEAL, MAX_PLAYER_HEALTH - DEFAULT_POTION_HEAL);
     }
 }
 
