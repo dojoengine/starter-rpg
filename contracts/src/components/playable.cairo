@@ -49,12 +49,43 @@ mod PlayableComponent {
             name: felt252,
             role: u8,
             mode: u8
-        ) {}
+        ) {// [Setup] Datastore
+        // [Compute] Caller id
+        // [Compute] Current timestamp
+        // [Effect] Create player
+        // [Effect] Player role
+        // [Effect] Set player
+        }
 
-        fn move(self: @ComponentState<TContractState>, world: IWorldDispatcher, direction: u8) {}
+        fn move(self: @ComponentState<TContractState>, world: IWorldDispatcher, direction: u8) {// [Setup] Datastore
+        // [Compute] Caller id
+        // [Compute] Player and dungeon entities
+        // [Check] Player is not dead
+        // [Check] Current dungeon is done
+        // [Effect] Move player
+        // [Effect] Create new dungeon
+        // [Effect] Update state
+        }
 
-        fn attack(self: @ComponentState<TContractState>, world: IWorldDispatcher) {}
+        fn attack(self: @ComponentState<TContractState>, world: IWorldDispatcher) {// [Setup] Datastore
+        // [Compute] Caller id
+        // [Compute] Player and dungeon entities
+        // [Check] Player is not dead
+        // [Check] Current dungeon is not done
+        // [Effect] Attack
+        // [Check] Dungeon is done
+        // [Effect] Reward player
+        // [Effect] Take damage
+        // [Effect] Update state
+        }
 
-        fn heal(self: @ComponentState<TContractState>, world: IWorldDispatcher, quantity: u8) {}
+        fn heal(self: @ComponentState<TContractState>, world: IWorldDispatcher, quantity: u8) {// [Setup] Datastore
+        // [Compute] Caller id
+        // [Compute] Player and dungeon entities
+        // [Check] Player is not dead
+        // [Check] Current dungeon is a shop
+        // [Effect] Heal
+        // [Effect] Update state
+        }
     }
 }
