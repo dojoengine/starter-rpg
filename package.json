@@ -1,0 +1,5 @@
+{
+	"dependencies": {
+		"@dojoengine/create-burner": "1.0.0-alpha.5"
+	}
+}
