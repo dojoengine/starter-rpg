@@ -94,7 +94,11 @@ function App() {
 
     setPlayers((prevPlayers) => {
       const newPlayers = { ...prevPlayers };
-      if (entities && entities[hash]["dojo_starter_rpg-Player"]) {
+      if (
+        entities &&
+        entities[hash] &&
+        entities[hash]["dojo_starter_rpg-Player"]
+      ) {
         const playerData = entities[hash]["dojo_starter_rpg-Player"];
         const player: Player = {
           damage: Number(playerData.damage.value),
@@ -114,7 +118,11 @@ function App() {
 
     setDungeons((prevDungeons) => {
       const newDungeons = { ...prevDungeons };
-      if (entities && entities[hash]["dojo_starter_rpg-Dungeon"]) {
+      if (
+        entities &&
+        entities[hash] &&
+        entities[hash]["dojo_starter_rpg-Dungeon"]
+      ) {
         const dungeonData = entities[hash]["dojo_starter_rpg-Dungeon"];
         const dungeon: Dungeon = {
           reward: Number(dungeonData.reward.value),
@@ -281,8 +289,9 @@ function App() {
         <ul>
           {Object.values(players).map((player) => (
             <li key={player.id}>
-              Name: {torii.parseCairoShortString(player.name)}, Health:{" "}
-              {player.health}, Gold: {player.gold}
+              Name: {torii.parseCairoShortString(player.name)}, <br />
+              Health: {player.health}, <br />
+              Gold: {player.gold}
             </li>
           ))}
         </ul>
@@ -291,8 +300,8 @@ function App() {
         <ul>
           {Object.values(dungeons).map((dungeon) => (
             <li key={dungeon.id}>
-              ID: {dungeon.id}, Monster: {dungeon.monster}, Health:{" "}
-              {dungeon.health}
+              ID: {dungeon.id}, <br /> Monster: {dungeon.monster}, <br />
+              Health: {dungeon.health}
             </li>
           ))}
         </ul>
