@@ -69,3 +69,36 @@ impl DungeonAssert of AssertTrait {
     }
 }
 
+
+#[cfg(test)]
+mod tests {
+    // Local imports
+
+    use super::{
+        Dungeon, DungeonTrait, AssertTrait, Role, RoleTrait, Monster, MonsterTrait, Mode, ModeTrait
+    };
+
+    // Constants
+
+    const ID: felt252 = 'ID';
+    const MONSTER: Monster = Monster::Common;
+    const ROLE: Role = Role::Fire;
+
+    #[test]
+    fn test_dungeon_new() {
+        let dungeon: Dungeon = DungeonTrait::new(ID, MONSTER, ROLE);
+        assert_eq!(dungeon.id, ID);
+        assert_eq!(dungeon.monster, MONSTER.into());
+        assert_eq!(dungeon.role, ROLE.into());
+        assert_eq!(dungeon.damage, MONSTER.damage());
+        assert_eq!(dungeon.health, MONSTER.health());
+        assert_eq!(dungeon.reward, MONSTER.reward());
+    }
+
+    #[test]
+    fn test_dungeon_is_done() {}
+
+    #[test]
+    fn test_dungeon_take_damage() {}
+}
+
