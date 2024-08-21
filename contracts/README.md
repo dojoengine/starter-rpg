@@ -25,12 +25,14 @@ Read the full tutorial [here](https://book.dojoengine.org/tutorial/dojo-starter)
 ## Running Locally
 
 #### Terminal one (Make sure this is running)
+
 ```bash
 # Run Katana
 katana --disable-fee --allowed-origins "*"
 ```
 
 #### Terminal two
+
 ```bash
 # Build the example
 sozo build
@@ -39,7 +41,7 @@ sozo build
 sozo migrate apply
 
 # Start Torii
-torii --world 0x70835f8344647b1e573fe7aeccbf044230089eb19624d3c7dea4080f5dcb025 --allowed-origins "*"
+torii --world 0x64ba78fe3ab8aedf19206180187d77a8b20b2a1f94877e18b86cb92dca82334 --allowed-origins "*"
 ```
 
 ---
