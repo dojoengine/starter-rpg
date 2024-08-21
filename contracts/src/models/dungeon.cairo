@@ -69,3 +69,48 @@ impl DungeonAssert of AssertTrait {
     }
 }
 
+#[cfg(test)]
+mod tests {
+    // Local imports
+
+    use super::{
+        Dungeon, DungeonTrait, AssertTrait, Role, RoleTrait, Monster, MonsterTrait, Mode, ModeTrait
+    };
+
+    // Constants
+
+    const ID: felt252 = 'ID';
+    const MONSTER: Monster = Monster::Common;
+    const ROLE: Role = Role::Fire;
+
+    #[test]
+    fn test_dungeon_new() {
+        let dungeon: Dungeon = DungeonTrait::new(ID, MONSTER, ROLE);
+        assert_eq!(dungeon.id, ID);
+        assert_eq!(dungeon.monster, MONSTER.into());
+        assert_eq!(dungeon.role, ROLE.into());
+        assert_eq!(dungeon.damage, MONSTER.damage());
+        assert_eq!(dungeon.health, MONSTER.health());
+        assert_eq!(dungeon.reward, MONSTER.reward());
+    }
+
+    #[test]
+    fn test_dungeon_is_done() {
+        let dungeon: Dungeon = DungeonTrait::new(ID, Monster::None, Role::None);
+        assert!(dungeon.is_done());
+        let mut dungeon: Dungeon = DungeonTrait::new(ID, MONSTER, ROLE);
+        assert!(!dungeon.is_done());
+        dungeon.take_damage(Role::Water, dungeon.health);
+        assert!(dungeon.is_done());
+    }
+
+    #[test]
+    fn test_dungeon_take_damage() {
+        let mut dungeon: Dungeon = DungeonTrait::new(ID, MONSTER, ROLE);
+        let damage: u8 = 10;
+        let player_role: Role = Role::Water;
+        dungeon.take_damage(player_role, damage);
+        assert_eq!(dungeon.health < MONSTER.health(), true);
+    }
+}
+
