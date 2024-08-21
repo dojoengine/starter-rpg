@@ -58,20 +58,12 @@ mod actions {
 
     #[abi(embed_v0)]
     impl ActionsImpl of IActions<ContractState> {
-        fn spawn(self: @ContractState, name: felt252, role: u8) {
-            self.playable.spawn(self.world(), name, role, Mode::Medium.into())
-        }
+        fn spawn(self: @ContractState, name: felt252, role: u8) {}
 
-        fn move(self: @ContractState, direction: u8) {
-            self.playable.move(self.world(), direction)
-        }
+        fn move(self: @ContractState, direction: u8) {}
 
-        fn attack(self: @ContractState) {
-            self.playable.attack(self.world())
-        }
+        fn attack(self: @ContractState) {}
 
-        fn heal(self: @ContractState, quantity: u8) {
-            self.playable.heal(self.world(), quantity)
-        }
+        fn heal(self: @ContractState, quantity: u8) {}
     }
 }
