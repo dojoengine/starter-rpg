@@ -4,8 +4,8 @@ class_hash = "0x458d0ce5b14a4844092bdb62050f462d53362304a13febbac6d973691d61be2"
 original_class_hash = "0x458d0ce5b14a4844092bdb62050f462d53362304a13febbac6d973691d61be2"
 abi = "manifests/dev/deployment/abis/dojo-world.json"
 address = "0x64ba78fe3ab8aedf19206180187d77a8b20b2a1f94877e18b86cb92dca82334"
-transaction_hash = "0x7f60381b90f4a4ea937b89f903df43b1836e7c39f50b544bd37046c6e8ae8ca"
-block_number = 3
+transaction_hash = "0x4d5639d13bb4f8c2254645f4318b8e6e1215bdf0847608e8b09ddf91e18d99c"
+block_number = 5
 seed = "dojo_starter_rpg"
 manifest_name = "dojo-world"
 

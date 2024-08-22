@@ -10,9 +10,7 @@ function App() {
   const {
     setup: {
       clientComponents: { Dungeon, Player },
-      toriiClient,
       client,
-      contractComponents,
     },
     account: { account },
   } = useDojo();
