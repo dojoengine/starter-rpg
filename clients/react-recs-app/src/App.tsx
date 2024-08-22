@@ -19,8 +19,7 @@ function App() {
   const entityId = getEntityIdFromKeys([BigInt(account.address)]) as Entity;
 
   const player = useComponentValue(Player, entityId);
-
-  console.log(player);
+  const dungeon = useComponentValue(Dungeon, entityId);
 
   return (
     <>
@@ -43,6 +42,7 @@ function App() {
 
         <div className="grid grid-cols-2 gap-1">
           <Button
+            disabled={dungeon?.health !== 0}
             onClick={async () => {
               await client.actions.move({
                 account,
@@ -54,6 +54,7 @@ function App() {
             North
           </Button>
           <Button
+            disabled={dungeon?.health !== 0}
             onClick={async () => {
               await client.actions.move({
                 account,
@@ -65,6 +66,7 @@ function App() {
             South
           </Button>
           <Button
+            disabled={dungeon?.health !== 0}
             onClick={async () => {
               await client.actions.move({
                 account,
@@ -76,6 +78,7 @@ function App() {
             East
           </Button>
           <Button
+            disabled={dungeon?.health !== 0}
             onClick={async () => {
               await client.actions.move({
                 account,
@@ -101,16 +104,37 @@ function App() {
           >
             Heal
           </Button>
-          <Button
-            onClick={async () => {
-              await client.actions.attack({
-                account,
-              });
-            }}
-            variant={"destructive"}
-          >
-            Attack
-          </Button>
+          {dungeon?.health !== 0 && (
+            <Button
+              onClick={async () => {
+                await client.actions.attack({
+                  account,
+                });
+              }}
+              variant={"destructive"}
+            >
+              Attack
+            </Button>
+          )}
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div className="p-4 rounded border">
+            <h3 className="text-xl">Player</h3>
+            <div>
+              {torii.parseCairoShortString(player?.name.toString() || "0")}
+            </div>
+            <div>HP: {player?.health.toString()}</div>
+            <div>Gold: {player?.gold.toString()}</div>
+            <div>Score: {player?.score.toString()}</div>
+          </div>
+          <div className="p-4 rounded border">
+            <h3 className="text-xl">Dungeon</h3>
+
+            <div>Monster: {dungeon?.monster}</div>
+            <div>Health: {dungeon?.health}</div>
+            <div>Role: {dungeon?.role}</div>
+          </div>
         </div>
       </div>
     </>
