@@ -6,7 +6,7 @@ import { Button } from "./components/ui/button";
 import { setupWorld } from "./typescript/contracts.gen";
 import { DojoProvider } from "@dojoengine/core";
 import { BurnerManager } from "@dojoengine/create-burner";
-import { Account, num, shortString } from "starknet";
+import { Account } from "starknet";
 import { Dungeon, Player } from "./types";
 
 const client = await setupWorld(
