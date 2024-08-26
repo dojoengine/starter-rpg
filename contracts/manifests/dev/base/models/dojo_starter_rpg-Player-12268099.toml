@@ -3,6 +3,7 @@ class_hash = "0x2cb22c61577afc5f6c2977f2c40f005aa67d96524cbb0e925607c23e10a718e"
 original_class_hash = "0x2cb22c61577afc5f6c2977f2c40f005aa67d96524cbb0e925607c23e10a718e"
 abi = "manifests/dev/base/abis/models/dojo_starter_rpg-Player-12268099.json"
 tag = "dojo_starter_rpg-Player"
+qualified_path = "rpg::models::index::player"
 manifest_name = "dojo_starter_rpg-Player-12268099"
 
 [[members]]

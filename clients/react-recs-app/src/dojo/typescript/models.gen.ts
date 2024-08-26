@@ -102,7 +102,7 @@ export function defineContractComponents(world: World) {
         {
           metadata: {
             namespace: "dojo_starter_rpg",
-            name: "dojo_starter_rpg-Dungeon",
+            name: "Dungeon",
             types: ["felt252", "u8", "u8", "u8", "u8", "u16"],
             customTypes: [],
           },
@@ -128,7 +128,7 @@ export function defineContractComponents(world: World) {
         {
           metadata: {
             namespace: "dojo_starter_rpg",
-            name: "dojo_starter_rpg-Player",
+            name: "Player",
             types: [
               "felt252",
               "u8",

@@ -21,6 +21,9 @@ function App() {
   const player = useComponentValue(Player, entityId);
   const dungeon = useComponentValue(Dungeon, entityId);
 
+  console.log("dungeon", dungeon);
+  console.log("player", player);
+
   return (
     <>
       <div className="bg-black text-green-600 h-screen w-screen p-10">
@@ -42,7 +45,7 @@ function App() {
 
         <div className="grid grid-cols-2 gap-1">
           <Button
-            disabled={dungeon?.health !== 0}
+            disabled={dungeon && dungeon?.health !== 0}
             onClick={async () => {
               await client.actions.move({
                 account,
@@ -54,7 +57,7 @@ function App() {
             North
           </Button>
           <Button
-            disabled={dungeon?.health !== 0}
+            disabled={dungeon && dungeon?.health !== 0}
             onClick={async () => {
               await client.actions.move({
                 account,
@@ -66,7 +69,7 @@ function App() {
             South
           </Button>
           <Button
-            disabled={dungeon?.health !== 0}
+            disabled={dungeon && dungeon?.health !== 0}
             onClick={async () => {
               await client.actions.move({
                 account,
@@ -78,7 +81,7 @@ function App() {
             East
           </Button>
           <Button
-            disabled={dungeon?.health !== 0}
+            disabled={dungeon && dungeon?.health !== 0}
             onClick={async () => {
               await client.actions.move({
                 account,

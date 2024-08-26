@@ -756,6 +756,36 @@ pub impl PlayerModelEntityImpl of dojo::model::ModelEntity<PlayerEntity> {
     }
 }
 
+#[cfg(target: "test")]
+pub impl PlayerModelEntityTestImpl of dojo::model::ModelEntityTest<PlayerEntity> {
+    fn update_test(self: @PlayerEntity, world: dojo::world::IWorldDispatcher) {
+        let world_test = dojo::world::IWorldTestDispatcher {
+            contract_address: world.contract_address
+        };
+
+        dojo::world::IWorldTestDispatcherTrait::set_entity_test(
+            world_test,
+            dojo::model::Model::<Player>::selector(),
+            dojo::model::ModelIndex::Id(self.id()),
+            self.values(),
+            dojo::model::Model::<Player>::layout()
+        );
+    }
+
+    fn delete_test(self: @PlayerEntity, world: dojo::world::IWorldDispatcher) {
+        let world_test = dojo::world::IWorldTestDispatcher {
+            contract_address: world.contract_address
+        };
+
+        dojo::world::IWorldTestDispatcherTrait::delete_entity_test(
+            world_test,
+            dojo::model::Model::<Player>::selector(),
+            dojo::model::ModelIndex::Id(self.id()),
+            dojo::model::Model::<Player>::layout()
+        );
+    }
+}
+
 pub impl PlayerModelImpl of dojo::model::Model<Player> {
     fn get(world: dojo::world::IWorldDispatcher, keys: Span<felt252>) -> Player {
         let mut values = dojo::world::IWorldDispatcherTrait::entity(
@@ -900,6 +930,36 @@ pub impl PlayerModelImpl of dojo::model::Model<Player> {
     #[inline(always)]
     fn packed_size() -> Option<usize> {
         dojo::model::layout::compute_packed_size(Self::layout())
+    }
+}
+
+#[cfg(target: "test")]
+pub impl PlayerModelTestImpl of dojo::model::ModelTest<Player> {
+    fn set_test(self: @Player, world: dojo::world::IWorldDispatcher) {
+        let world_test = dojo::world::IWorldTestDispatcher {
+            contract_address: world.contract_address
+        };
+
+        dojo::world::IWorldTestDispatcherTrait::set_entity_test(
+            world_test,
+            dojo::model::Model::<Player>::selector(),
+            dojo::model::ModelIndex::Keys(dojo::model::Model::<Player>::keys(self)),
+            dojo::model::Model::<Player>::values(self),
+            dojo::model::Model::<Player>::layout()
+        );
+    }
+
+    fn delete_test(self: @Player, world: dojo::world::IWorldDispatcher) {
+        let world_test = dojo::world::IWorldTestDispatcher {
+            contract_address: world.contract_address
+        };
+
+        dojo::world::IWorldTestDispatcherTrait::delete_entity_test(
+            world_test,
+            dojo::model::Model::<Player>::selector(),
+            dojo::model::ModelIndex::Keys(dojo::model::Model::<Player>::keys(self)),
+            dojo::model::Model::<Player>::layout()
+        );
     }
 }
 

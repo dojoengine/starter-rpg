@@ -537,6 +537,36 @@ pub impl DungeonModelEntityImpl of dojo::model::ModelEntity<DungeonEntity> {
     }
 }
 
+#[cfg(target: "test")]
+pub impl DungeonModelEntityTestImpl of dojo::model::ModelEntityTest<DungeonEntity> {
+    fn update_test(self: @DungeonEntity, world: dojo::world::IWorldDispatcher) {
+        let world_test = dojo::world::IWorldTestDispatcher {
+            contract_address: world.contract_address
+        };
+
+        dojo::world::IWorldTestDispatcherTrait::set_entity_test(
+            world_test,
+            dojo::model::Model::<Dungeon>::selector(),
+            dojo::model::ModelIndex::Id(self.id()),
+            self.values(),
+            dojo::model::Model::<Dungeon>::layout()
+        );
+    }
+
+    fn delete_test(self: @DungeonEntity, world: dojo::world::IWorldDispatcher) {
+        let world_test = dojo::world::IWorldTestDispatcher {
+            contract_address: world.contract_address
+        };
+
+        dojo::world::IWorldTestDispatcherTrait::delete_entity_test(
+            world_test,
+            dojo::model::Model::<Dungeon>::selector(),
+            dojo::model::ModelIndex::Id(self.id()),
+            dojo::model::Model::<Dungeon>::layout()
+        );
+    }
+}
+
 pub impl DungeonModelImpl of dojo::model::Model<Dungeon> {
     fn get(world: dojo::world::IWorldDispatcher, keys: Span<felt252>) -> Dungeon {
         let mut values = dojo::world::IWorldDispatcherTrait::entity(
@@ -678,6 +708,36 @@ pub impl DungeonModelImpl of dojo::model::Model<Dungeon> {
     #[inline(always)]
     fn packed_size() -> Option<usize> {
         dojo::model::layout::compute_packed_size(Self::layout())
+    }
+}
+
+#[cfg(target: "test")]
+pub impl DungeonModelTestImpl of dojo::model::ModelTest<Dungeon> {
+    fn set_test(self: @Dungeon, world: dojo::world::IWorldDispatcher) {
+        let world_test = dojo::world::IWorldTestDispatcher {
+            contract_address: world.contract_address
+        };
+
+        dojo::world::IWorldTestDispatcherTrait::set_entity_test(
+            world_test,
+            dojo::model::Model::<Dungeon>::selector(),
+            dojo::model::ModelIndex::Keys(dojo::model::Model::<Dungeon>::keys(self)),
+            dojo::model::Model::<Dungeon>::values(self),
+            dojo::model::Model::<Dungeon>::layout()
+        );
+    }
+
+    fn delete_test(self: @Dungeon, world: dojo::world::IWorldDispatcher) {
+        let world_test = dojo::world::IWorldTestDispatcher {
+            contract_address: world.contract_address
+        };
+
+        dojo::world::IWorldTestDispatcherTrait::delete_entity_test(
+            world_test,
+            dojo::model::Model::<Dungeon>::selector(),
+            dojo::model::ModelIndex::Keys(dojo::model::Model::<Dungeon>::keys(self)),
+            dojo::model::Model::<Dungeon>::layout()
+        );
     }
 }
 
