@@ -10,10 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@dojoengine/core": "1.0.0-alpha.5",
+    "@dojoengine/core": "1.0.0-alpha.8",
     "@dojoengine/recs": "^2.0.13",
-    "@dojoengine/create-burner": "1.0.0-alpha.5",
-    "@dojoengine/torii-client": "1.0.0-alpha.5",
+    "@dojoengine/create-burner": "1.0.0-alpha.8",
+    "@dojoengine/torii-client": "1.0.0-alpha.8",
     "@radix-ui/react-slot": "^1.1.0",
     "@types/node": "^22.4.2",
     "autoprefixer": "^10.4.20",

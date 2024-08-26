@@ -1,0 +1,16 @@
+kind = "DojoModel"
+class_hash = "0x12a046ffed4bd4979a4674f7f50ea4236e97a177abc7d9ce08d56469dfe7b7f"
+original_class_hash = "0x12a046ffed4bd4979a4674f7f50ea4236e97a177abc7d9ce08d56469dfe7b7f"
+abi = "manifests/dev/base/abis/models/dojo_starter_rpg-BigBrainModel-16c5dbb4.json"
+tag = "dojo_starter_rpg-BigBrainModel"
+manifest_name = "dojo_starter_rpg-BigBrainModel-16c5dbb4"
+
+[[members]]
+name = "id"
+type = "felt252"
+key = true
+
+[[members]]
+name = "chad_factor"
+type = "u8"
+key = false
