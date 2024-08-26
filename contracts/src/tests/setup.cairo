@@ -16,10 +16,7 @@ mod setup {
     // Internal imports
 
     use rpg::models::index;
-    use rpg::models::player::Player;
-    use rpg::models::dungeon::Dungeon;
     use rpg::types::role::Role;
-    use rpg::types::mode::Mode;
     use rpg::systems::actions::{actions, IActions, IActionsDispatcher, IActionsDispatcherTrait};
 
     // Constants
