@@ -5,6 +5,7 @@ import { getEntityIdFromKeys } from "@dojoengine/utils";
 import { useDojo } from "./dojo/useDojo";
 import { Button } from "./components/ui/button";
 import * as torii from "@dojoengine/torii-client";
+import { HaikuMessages } from "./components/HaikuMessages";
 
 function App() {
   const {
@@ -138,6 +139,9 @@ function App() {
             <div>Health: {dungeon?.health}</div>
             <div>Role: {dungeon?.role}</div>
           </div>
+        </div>
+        <div className="absolute bottom-0 left-0 p-4" id="haiku-messages-container">
+          <HaikuMessages />
         </div>
       </div>
     </>

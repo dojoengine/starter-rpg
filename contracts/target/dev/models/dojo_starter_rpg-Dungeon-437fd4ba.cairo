@@ -92,6 +92,14 @@ pub impl DungeonEntityStoreImpl of DungeonEntityStore {
         DungeonModelEntityImpl::get(world, entity_id)
     }
 
+    fn update(self: @DungeonEntity, world: dojo::world::IWorldDispatcher) {
+        dojo::model::ModelEntity::<DungeonEntity>::update_entity(self, world);
+    }
+
+    fn delete(self: @DungeonEntity, world: dojo::world::IWorldDispatcher) {
+        dojo::model::ModelEntity::<DungeonEntity>::delete_entity(self, world);
+    }
+
 
     fn get_monster(world: dojo::world::IWorldDispatcher, entity_id: felt252) -> u8 {
         let mut values = dojo::model::ModelEntity::<
@@ -270,6 +278,14 @@ pub impl DungeonStoreImpl of DungeonStore {
         core::array::ArrayTrait::append(ref serialized, id);
 
         dojo::model::Model::<Dungeon>::get(world, serialized.span())
+    }
+
+    fn set(self: @Dungeon, world: dojo::world::IWorldDispatcher) {
+        dojo::model::Model::<Dungeon>::set_model(self, world);
+    }
+
+    fn delete(self: @Dungeon, world: dojo::world::IWorldDispatcher) {
+        dojo::model::Model::<Dungeon>::delete_model(self, world);
     }
 
 
@@ -477,7 +493,7 @@ pub impl DungeonModelEntityImpl of dojo::model::ModelEntity<DungeonEntity> {
         Self::from_values(entity_id, ref values)
     }
 
-    fn update(self: @DungeonEntity, world: dojo::world::IWorldDispatcher) {
+    fn update_entity(self: @DungeonEntity, world: dojo::world::IWorldDispatcher) {
         dojo::world::IWorldDispatcherTrait::set_entity(
             world,
             dojo::model::Model::<Dungeon>::selector(),
@@ -487,7 +503,7 @@ pub impl DungeonModelEntityImpl of dojo::model::ModelEntity<DungeonEntity> {
         );
     }
 
-    fn delete(self: @DungeonEntity, world: dojo::world::IWorldDispatcher) {
+    fn delete_entity(self: @DungeonEntity, world: dojo::world::IWorldDispatcher) {
         dojo::world::IWorldDispatcherTrait::delete_entity(
             world,
             dojo::model::Model::<Dungeon>::selector(),
@@ -577,7 +593,7 @@ pub impl DungeonModelImpl of dojo::model::Model<Dungeon> {
         DungeonStore::from_values(ref _keys, ref values)
     }
 
-    fn set(self: @Dungeon, world: dojo::world::IWorldDispatcher) {
+    fn set_model(self: @Dungeon, world: dojo::world::IWorldDispatcher) {
         dojo::world::IWorldDispatcherTrait::set_entity(
             world,
             Self::selector(),
@@ -587,7 +603,7 @@ pub impl DungeonModelImpl of dojo::model::Model<Dungeon> {
         );
     }
 
-    fn delete(self: @Dungeon, world: dojo::world::IWorldDispatcher) {
+    fn delete_model(self: @Dungeon, world: dojo::world::IWorldDispatcher) {
         dojo::world::IWorldDispatcherTrait::delete_entity(
             world, Self::selector(), dojo::model::ModelIndex::Keys(Self::keys(self)), Self::layout()
         );
