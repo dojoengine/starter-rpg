@@ -106,23 +106,22 @@ pub mod actions {
         }
     }
     #[starknet::interface]
-    trait IDojoInit<ContractState> {
+    pub trait IDojoInit<ContractState> {
         fn dojo_init(self: @ContractState);
     }
 
     #[abi(embed_v0)]
-    impl IDojoInitImpl of IDojoInit<ContractState> {
+    pub impl IDojoInitImpl of IDojoInit<ContractState> {
         fn dojo_init(self: @ContractState) {
-            assert(
-                starknet::get_caller_address() == self.world().contract_address,
-                'Only world can init'
-            );
-            assert(
-                self
-                    .world()
-                    .is_owner(self.selector(), starknet::get_tx_info().account_contract_address),
-                'Only owner can init'
-            );
+            if starknet::get_caller_address() != self.world().contract_address {
+                core::panics::panic_with_byte_array(
+                    @format!(
+                        "Only the world can init contract `{}`, but caller is `{:?}`",
+                        self.tag(),
+                        starknet::get_caller_address(),
+                    )
+                );
+            }
         }
     }
 }

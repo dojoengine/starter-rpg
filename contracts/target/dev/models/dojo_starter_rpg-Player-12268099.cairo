@@ -122,6 +122,14 @@ pub impl PlayerEntityStoreImpl of PlayerEntityStore {
         PlayerModelEntityImpl::get(world, entity_id)
     }
 
+    fn update(self: @PlayerEntity, world: dojo::world::IWorldDispatcher) {
+        dojo::model::ModelEntity::<PlayerEntity>::update_entity(self, world);
+    }
+
+    fn delete(self: @PlayerEntity, world: dojo::world::IWorldDispatcher) {
+        dojo::model::ModelEntity::<PlayerEntity>::delete_entity(self, world);
+    }
+
 
     fn get_mode(world: dojo::world::IWorldDispatcher, entity_id: felt252) -> u8 {
         let mut values = dojo::model::ModelEntity::<
@@ -387,6 +395,14 @@ pub impl PlayerStoreImpl of PlayerStore {
         core::array::ArrayTrait::append(ref serialized, id);
 
         dojo::model::Model::<Player>::get(world, serialized.span())
+    }
+
+    fn set(self: @Player, world: dojo::world::IWorldDispatcher) {
+        dojo::model::Model::<Player>::set_model(self, world);
+    }
+
+    fn delete(self: @Player, world: dojo::world::IWorldDispatcher) {
+        dojo::model::Model::<Player>::delete_model(self, world);
     }
 
 
@@ -696,7 +712,7 @@ pub impl PlayerModelEntityImpl of dojo::model::ModelEntity<PlayerEntity> {
         Self::from_values(entity_id, ref values)
     }
 
-    fn update(self: @PlayerEntity, world: dojo::world::IWorldDispatcher) {
+    fn update_entity(self: @PlayerEntity, world: dojo::world::IWorldDispatcher) {
         dojo::world::IWorldDispatcherTrait::set_entity(
             world,
             dojo::model::Model::<Player>::selector(),
@@ -706,7 +722,7 @@ pub impl PlayerModelEntityImpl of dojo::model::ModelEntity<PlayerEntity> {
         );
     }
 
-    fn delete(self: @PlayerEntity, world: dojo::world::IWorldDispatcher) {
+    fn delete_entity(self: @PlayerEntity, world: dojo::world::IWorldDispatcher) {
         dojo::world::IWorldDispatcherTrait::delete_entity(
             world,
             dojo::model::Model::<Player>::selector(),
@@ -796,7 +812,7 @@ pub impl PlayerModelImpl of dojo::model::Model<Player> {
         PlayerStore::from_values(ref _keys, ref values)
     }
 
-    fn set(self: @Player, world: dojo::world::IWorldDispatcher) {
+    fn set_model(self: @Player, world: dojo::world::IWorldDispatcher) {
         dojo::world::IWorldDispatcherTrait::set_entity(
             world,
             Self::selector(),
@@ -806,7 +822,7 @@ pub impl PlayerModelImpl of dojo::model::Model<Player> {
         );
     }
 
-    fn delete(self: @Player, world: dojo::world::IWorldDispatcher) {
+    fn delete_model(self: @Player, world: dojo::world::IWorldDispatcher) {
         dojo::world::IWorldDispatcherTrait::delete_entity(
             world, Self::selector(), dojo::model::ModelIndex::Keys(Self::keys(self)), Self::layout()
         );

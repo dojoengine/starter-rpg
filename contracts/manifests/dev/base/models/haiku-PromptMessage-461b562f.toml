@@ -1,0 +1,32 @@
+kind = "DojoModel"
+class_hash = "0x1db14cac86795ac0ff8dac3d7e426273d98e209007288169b9d8353bcbdd0e"
+original_class_hash = "0x1db14cac86795ac0ff8dac3d7e426273d98e209007288169b9d8353bcbdd0e"
+abi = "manifests/dev/base/abis/models/haiku-PromptMessage-461b562f.json"
+tag = "haiku-PromptMessage"
+qualified_path = "haiku_event::prompt_message"
+manifest_name = "haiku-PromptMessage-461b562f"
+
+[[members]]
+name = "identity"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "event_id"
+type = "u32"
+key = true
+
+[[members]]
+name = "event_tag"
+type = "ByteArray"
+key = false
+
+[[members]]
+name = "prompt"
+type = "ByteArray"
+key = false
+
+[[members]]
+name = "timestamp"
+type = "u64"
+key = false
